@@ -8,15 +8,12 @@
 #####################################################################
 
 from TikTokApi import TikTokApi
-import asyncio
-import pandas
 import requests
 import string
 import pathlib
 import colorama
 import os, sys
 import time
-from urllib.request import urlopen as uReq
 from pathlib import Path
 from colorama import *
 
