@@ -1,7 +1,7 @@
 #####################################################################
 #                                                                   #
 #  Dew3's TikTok Username Checker                                   # 
-#  v0.1                                                             #
+#  v0.2                                                             #
 #  Utilizes TikTokApi by David Teather to get user information      #
 #  Open README.txt before running the program                       #
 #                                                                   #
@@ -9,7 +9,6 @@
 
 from TikTokApi import TikTokApi
 import requests
-import string
 import pathlib
 import colorama
 import os, sys
@@ -26,7 +25,7 @@ names = open('Usernames.txt', 'r')
 available = open('Available.txt', 'w') 
 mypath = Path('Usernames.txt')
 numberOfUsernames = 0
-
+savedNames = 0
 
 def check():
     print(Fore.LIGHTBLACK_EX+"["+Fore.CYAN+"+"+Fore.LIGHTBLACK_EX+"]"+"Dew3's TikTok Username Checker")
@@ -54,7 +53,8 @@ def check():
                       print(Fore.WHITE+"["+Style.BRIGHT + Fore.RED + Back.BLACK+"Taken"+Fore.WHITE+"]" +Fore.WHITE +username)
 
                   except: #Catches the TikTokNotFound exception. Therefore the username isn't taken.
-
+                      global savedNames
+                      savedNames+=1
                       available.write(username + "\n") #The username isn't taken so we store it into 'Availables.txt'
                       print(Fore.WHITE+"["+Style.BRIGHT + Fore.GREEN + Back.BLACK+"Not Taken"+Fore.WHITE+"]" +Fore.WHITE +username)
               
@@ -63,7 +63,7 @@ check()
 toc = time.perf_counter() #Program timer stop
 available.close()         
 print(Fore.CYAN+"\nChecker finished " + str(numberOfUsernames) + f" usernames in {toc - tic:0.4f} seconds")
-print("Available usernames saved!")
+print("Saved " + str(savedNames) + " username(s) saved!")
 print(Fore.RED +"Closing in 5 seconds")
 time.sleep(5)
 sys.exit()
